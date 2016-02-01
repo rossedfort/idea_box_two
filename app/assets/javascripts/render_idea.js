@@ -12,6 +12,7 @@ function renderIdea(idea) {
                      + "</h5>"
                      + "<p>Quality: "
                      + idea.quality
-                     + "</p></div>"
+                     + "</p>"
+                     + "<button id='deleteIdeaButton' name='button-fetch' class='btn red btn-delete'>Delete</button></div>"
                     )
 };

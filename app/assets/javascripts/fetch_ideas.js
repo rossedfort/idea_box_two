@@ -18,7 +18,7 @@ function fetchIdeas(){
 };
 
 function fetchIdeasButton(){
-  $("#fetchIdeasButton").click(function(){
+  $("[name='button-fetch']").click(function(){
     fetchIdeas();
   })
 };

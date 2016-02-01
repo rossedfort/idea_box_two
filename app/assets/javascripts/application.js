@@ -20,4 +20,5 @@ $(document).ready(function(){
   fetchIdeas();
   fetchIdeasButton();
   createIdea();
+  deleteIdea();
 });

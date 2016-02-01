@@ -22,11 +22,17 @@
   margin: 10px 0px 100px 0px;
 }
 
-.fetchIdeasButton button {
-  margin: 25px 0px 25px 0px;
-}
-
 .idea {
+  padding: 10px;
   border: 2px solid #ccc;
   margin-bottom: 50px;
+}
+
+.btn-delete {
+  border-width: 2px;
+  border-color: white;
+  height: 20px;
+  line-height: 20px;
+  font-size: 10px;
+  padding: 0 1rem;
 }
