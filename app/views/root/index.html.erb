@@ -1,6 +1,12 @@
 <div class="container">
-  <div class="createIdeaButton">
-    <button type="button" id="createIdeaButton">New Idea</button>
+  <div class="createIdeaForm">
+    <%= form_tag(api_v1_ideas_path) do %>
+      <%= label_tag :title %>
+      <%= text_field_tag :title %>
+      <%= label_tag :body %>
+      <%= text_field_tag :body %>
+      <%= submit_tag :save %>
+    <% end %>
   </div>
   <div class="fetchIdeasButton">
     <button type="button" id="fetchIdeasButton">Fetch Ideas!</button>

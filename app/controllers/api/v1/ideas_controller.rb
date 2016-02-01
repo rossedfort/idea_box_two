@@ -1,17 +1,18 @@
 class Api::V1::IdeasController < ApplicationController
-  respond_to :json
+  respond_to :json, :xml
 
   def index
     respond_with Idea.all
   end
 
   def create
-    respond_with Idea.create(idea_params)
+    Idea.create(idea_params)
+    redirect_to :back
   end
 
   private
 
-  def item_params
-    params.require(:item).permit(:title, :body)
+  def idea_params
+    params.permit(:title, :body)
   end
 end
