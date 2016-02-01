@@ -1,5 +1,5 @@
 function fetchIdeas(){
-  var newestIdeaID = parseInt($(".idea").last().attr("data-id"))
+  var newestIdeaID = parseInt($(".idea").first().attr("data-id"))
 
   $.ajax({
     type:    "GET",

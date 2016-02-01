@@ -6,13 +6,18 @@ class Api::V1::IdeasController < ApplicationController
   end
 
   def create
-    Idea.create(idea_params)
-    redirect_to :back
+    @idea = Idea.new(idea_params)
+
+    if @idea.save
+      respond_with :api, :v1, @idea
+    else
+      #whatevs
+    end
   end
 
   private
 
   def idea_params
-    params.permit(:title, :body)
+    params.require(:idea).permit(:title, :body)
   end
 end
