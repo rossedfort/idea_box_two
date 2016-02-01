@@ -17,3 +17,16 @@
  @import "materialize/components/color";
  $primary-color: color("gray", "lighten-1") !default;
  @import 'materialize';
+
+.createIdeaForm {
+  margin: 10px 0px 100px 0px;
+}
+
+.fetchIdeasButton button {
+  margin: 25px 0px 25px 0px;
+}
+
+.idea {
+  border: 2px solid #ccc;
+  margin-bottom: 50px;
+}

@@ -1,5 +1,5 @@
 function renderIdea(idea) {
-  $(".ideas").append("<div class='idea' id=idea"
+  $(".ideas").prepend("<div class='idea' id=idea"
                      + idea.id
                      + " data-id="
                      + idea.id
