@@ -19,7 +19,9 @@ group :development, :test do
   gem 'magic_lamp'
   gem 'database_cleaner'
   gem 'pry'
+  gem "factory_girl_rails", "~> 4.0"
   gem 'rspec-rails'
+  gem 'database_cleaner'
 end
 
 group :development do

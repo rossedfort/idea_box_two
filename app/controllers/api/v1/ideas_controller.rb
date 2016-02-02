@@ -11,7 +11,7 @@ class Api::V1::IdeasController < ApplicationController
     if @idea.save
       respond_with :api, :v1, @idea
     else
-      #whatevs
+      # sad path for api?
     end
   end
 
