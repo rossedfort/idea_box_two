@@ -17,7 +17,6 @@ group :development, :test do
   gem 'teaspoon'
   gem 'teaspoon-mocha'
   gem 'phantomjs'
-  gem 'magic_lamp'
   gem 'database_cleaner'
   gem 'pry'
   gem "factory_girl_rails", "~> 4.0"
