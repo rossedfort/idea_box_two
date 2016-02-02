@@ -19,16 +19,21 @@
  @import 'materialize';
 
 .createIdeaForm {
-  margin: 10px 0px 100px 0px;
+  background: white;
+  padding: 20px;
+  margin: 10px 0px 75px 0px;
 }
 
 .idea {
-  padding: 10px;
+  background: white;
+  padding: 20px;
   border: 2px solid #ccc;
   margin-bottom: 50px;
+  overflow-y: auto;
 }
 
 .idea h5 {
+  margin-top: 25px;
   display: inline;
 }
 
@@ -80,12 +85,22 @@
   background-color: #e1f5fe;
 }
 
-#upvoteIdeaButton img {
+.upvoteIdeaButton img {
   width: 20px;
   padding: 0px;
 }
 
-#downvoteIdeaButton img {
+.downvoteIdeaButton img {
   width: 20px;
   padding: 0px;
+}
+
+.popup {
+  color: red;
+  margin-left: 20px;
+}
+
+.idea p {
+  display: inline;
+  margin-top: 25px;
 }
