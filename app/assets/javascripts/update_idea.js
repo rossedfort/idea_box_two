@@ -3,7 +3,9 @@ function updateIdea() {
     var $idea = $(this).closest(".idea");
     document.getElementById("ideaTitle" + $idea.attr('data-id')).contentEditable = true;
     document.getElementById("ideaBody" + $idea.attr('data-id')).contentEditable = true;
+    
     $($idea).append("<button id='saveIdeaButton' name='button-fetch' class='btn blue btn-save'>Save</button>")
+
     $("#saveIdeaButton").click(function(){
       document.getElementById("ideaTitle" + $idea.attr('data-id')).contentEditable = false;
       document.getElementById("ideaBody" + $idea.attr('data-id')).contentEditable = false;

@@ -3,6 +3,8 @@ function renderIdea(idea) {
                      + idea.id
                      + " data-id="
                      + idea.id
+                     + " qual="
+                     + idea.quality
                      + " >"
                      + "<h5>Title: </h5>"
                      + "<h5 id='ideaTitle" + idea.id + "' >" + idea.title + "</h5><br>"
