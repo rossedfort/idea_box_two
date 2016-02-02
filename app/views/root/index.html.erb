@@ -9,6 +9,12 @@
       <button class="btn blue" type="button" id="createIdeaButton">Save</button>
     <% end %>
   </div>
+  <div class="row center">
+    <div class="filter col s6 offset-s3">
+      <%= label_tag :search %>
+      <%= text_field_tag :filter %>
+    </div>
+  </div>
   <div class="ideas">
   </div>
 </div>
