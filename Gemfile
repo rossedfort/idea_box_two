@@ -13,6 +13,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'materialize-sass'
 
 group :development, :test do
+  gem 'simplecov'
   gem 'teaspoon'
   gem 'teaspoon-mocha'
   gem 'phantomjs'
