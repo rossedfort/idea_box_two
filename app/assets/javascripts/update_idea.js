@@ -17,11 +17,11 @@ function updateIdea() {
       }
 
       $.ajax({
-        type: 'PATCH',
+        type: 'PUT',
         url: '/api/v1/ideas/' + $idea.attr('data-id'),
         data: ideaParams,
-        success: function(updatedIdea) {
-          renderIdea(updatedIdea);
+        success: function() {
+          fetchIdeas();
         },
         error: function(xhr) {
           console.log(xhr.responseText)

@@ -61,6 +61,10 @@
   margin-left: 10px;
 }
 
+[contenteditable="true"] {
+  background-color: #e1f5fe;
+}
+
 [contenteditable="true"]:active,
 [contenteditable="true"]:focus{
   background-color: #e1f5fe;
