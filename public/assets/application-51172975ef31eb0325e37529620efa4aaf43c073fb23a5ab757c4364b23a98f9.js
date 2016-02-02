@@ -19234,6 +19234,37 @@ function deleteIdea() {
     });
   });
 };
+function downvoteIdea() {
+  $('.ideas').delegate('#downvoteIdeaButton', 'click', function() {
+    var $idea = $(this).closest(".idea");
+    if ($idea.attr('qual') === "swill") {
+      alert("Can't downvote anymore")
+    } else {
+      var qualities = ['swill', 'plausible', 'genius']
+      var qualId = qualities.findIndex(findQual)
+      function findQual(element, index, array) {
+        return $idea.attr('qual') === element
+      }
+      qualId -= 1
+      $.ajax({
+        type: 'PUT',
+        url: '/api/v1/ideas/' + $idea.attr('data-id'),
+        data: {
+          idea: {
+            quality: qualId
+          }
+        },
+        success: function() {
+          $(".ideas").children().remove();
+          fetchIdeas();
+        },
+        error: function(xhr) {
+          console.log(xhr.responseText)
+        }
+      });
+    }
+  });
+};
 function fetchIdeas(){
   var newestIdeaID = parseInt($(".idea").first().attr("data-id"))
 
@@ -19263,6 +19294,8 @@ function renderIdea(idea) {
                      + idea.id
                      + " data-id="
                      + idea.id
+                     + " qual="
+                     + idea.quality
                      + " >"
                      + "<h5>Title: </h5>"
                      + "<h5 id='ideaTitle" + idea.id + "' >" + idea.title + "</h5><br>"
@@ -19272,7 +19305,7 @@ function renderIdea(idea) {
                      + idea.quality
                      + "</p>"
                      + "<button id='deleteIdeaButton' name='button-fetch' class='btn red btn-delete'>Delete</button>"
-                     + "<button id='updateIdeaButton' name='button-fetch' class='btn green btn-update'>Update</button>"
+                     + "<button id='updateIdeaButton' name='button-fetch' class='btn green btn-update'>Edit</button>"
                      + "<button id='upvoteIdeaButton' name='button-fetch' class='btn btn-vote'><img src='assets/thumb_up.png'</button>"
                      + "<button id='downvoteIdeaButton' name='button-fetch' class='btn btn-vote'><img src='assets/thumb_down.png'</button></div>"
                     )
@@ -19282,7 +19315,9 @@ function updateIdea() {
     var $idea = $(this).closest(".idea");
     document.getElementById("ideaTitle" + $idea.attr('data-id')).contentEditable = true;
     document.getElementById("ideaBody" + $idea.attr('data-id')).contentEditable = true;
+
     $($idea).append("<button id='saveIdeaButton' name='button-fetch' class='btn blue btn-save'>Save</button>")
+
     $("#saveIdeaButton").click(function(){
       document.getElementById("ideaTitle" + $idea.attr('data-id')).contentEditable = false;
       document.getElementById("ideaBody" + $idea.attr('data-id')).contentEditable = false;
@@ -19312,7 +19347,32 @@ function updateIdea() {
 function upvoteIdea() {
   $('.ideas').delegate('#upvoteIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
-    
+    if ($idea.attr('qual') === "genius") {
+      alert("Can't upvote anymore")
+    } else {
+      var qualities = ['swill', 'plausible', 'genius']
+      var qualId = qualities.findIndex(findQual)
+      function findQual(element, index, array) {
+        return $idea.attr('qual') === element
+      }
+      qualId += 1
+      $.ajax({
+        type: 'PUT',
+        url: '/api/v1/ideas/' + $idea.attr('data-id'),
+        data: {
+          idea: {
+            quality: qualId
+          }
+        },
+        success: function() {
+          $(".ideas").children().remove();
+          fetchIdeas();
+        },
+        error: function(xhr) {
+          console.log(xhr.responseText)
+        }
+      });
+    }
   });
 };
 // This is a manifest file that'll be compiled into application.js, which will include all the files
@@ -19340,4 +19400,5 @@ $(document).ready(function(){
   deleteIdea();
   updateIdea();
   upvoteIdea();
+  downvoteIdea();
 });
