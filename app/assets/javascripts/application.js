@@ -21,4 +21,5 @@ $(document).ready(function(){
   fetchIdeasButton();
   createIdea();
   deleteIdea();
+  updateIdea();
 });
