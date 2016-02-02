@@ -11,7 +11,7 @@ class Api::V1::IdeasController < ApplicationController
     if @idea.save
       respond_with :api, :v1, @idea
     else
-      # sad path for api?
+      respond_with @idea.errors.full_messages.join(", ")
     end
   end
 
@@ -26,6 +26,7 @@ class Api::V1::IdeasController < ApplicationController
   private
 
   def idea_params
-    params.require(:idea).permit(:title, :body)
+    params[:idea][:quality] = params[:idea][:quality].to_i
+    params.require(:idea).permit(:title, :body, :quality)
   end
 end

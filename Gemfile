@@ -13,6 +13,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'materialize-sass'
 
 group :development, :test do
+  gem 'simplecov'
+  gem 'teaspoon'
+  gem 'teaspoon-mocha'
+  gem 'phantomjs'
+  gem 'magic_lamp'
+  gem 'database_cleaner'
   gem 'pry'
   gem "factory_girl_rails", "~> 4.0"
   gem 'rspec-rails'

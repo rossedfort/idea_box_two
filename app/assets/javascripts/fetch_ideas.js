@@ -1,3 +1,4 @@
+
 function fetchIdeas(){
   var newestIdeaID = parseInt($(".idea").first().attr("data-id"))
 
