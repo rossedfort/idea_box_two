@@ -19306,8 +19306,8 @@ function renderIdea(idea) {
                      + "</p>"
                      + "<button id='deleteIdeaButton' name='button-fetch' class='btn red btn-delete'>Delete</button>"
                      + "<button id='updateIdeaButton' name='button-fetch' class='btn green btn-update'>Edit</button>"
-                     + "<button id='upvoteIdeaButton' name='button-fetch' class='btn btn-vote'><img src='assets/thumb_up.png'</button>"
-                     + "<button id='downvoteIdeaButton' name='button-fetch' class='btn btn-vote'><img src='assets/thumb_down.png'</button></div>"
+                     + "<button id='upvoteIdeaButton' name='button-fetch' class='btn btn-vote'><img src='/assets/thumb_up.png'></button>"
+                     + "<button id='downvoteIdeaButton' name='button-fetch' class='btn btn-vote'><img src='/assets/thumb_down.png'></button></div>"
                     )
 };
 function updateIdea() {

@@ -21,7 +21,6 @@ group :development, :test do
   gem 'pry'
   gem "factory_girl_rails", "~> 4.0"
   gem 'rspec-rails'
-  gem 'database_cleaner'
 end
 
 group :development do
