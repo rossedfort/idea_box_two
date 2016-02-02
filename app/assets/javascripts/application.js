@@ -23,4 +23,5 @@ $(document).ready(function(){
   deleteIdea();
   updateIdea();
   upvoteIdea();
+  downvoteIdea();
 });
