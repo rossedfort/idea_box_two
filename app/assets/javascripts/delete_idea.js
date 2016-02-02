@@ -1,5 +1,5 @@
 function deleteIdea() {
-  $('.ideas').delegate('#deleteIdeaButton', 'click', function() {
+  $('.ideas').delegate('.deleteIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea")
 
     $.ajax({

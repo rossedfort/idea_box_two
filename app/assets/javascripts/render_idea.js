@@ -3,19 +3,19 @@ function renderIdea(idea) {
                      + idea.id
                      + " data-id="
                      + idea.id
-                     + " qual="
+                     + " data-qual="
                      + idea.quality
                      + " >"
                      + "<h5>Title: </h5>"
                      + "<h5 id='ideaTitle" + idea.id + "' >" + idea.title + "</h5><br>"
                      + "<h5>Body: </h5>"
                      + "<h5 id='ideaBody" + idea.id + "' >" + idea.body + "</h5><br>"
-                     + "<p>Quality: "
+                     + "<p class='quality'>Quality: "
                      + idea.quality
-                     + "</p>"
-                     + "<button id='deleteIdeaButton' name='button-fetch' class='btn red btn-delete'>Delete</button>"
-                     + "<button id='updateIdeaButton' name='button-fetch' class='btn green btn-update'>Edit</button>"
-                     + "<button id='upvoteIdeaButton' name='button-fetch' class='btn btn-vote'><img src='/assets/thumb_up.png'></button>"
-                     + "<button id='downvoteIdeaButton' name='button-fetch' class='btn btn-vote'><img src='/assets/thumb_down.png'></button></div>"
+                     + "</p><br>"
+                     + "<button name='button-fetch' class='deleteIdeaButton btn red btn-delete'>Delete</button>"
+                     + "<button name='button-fetch' class='updateIdeaButton btn green btn-update'>Edit</button>"
+                     + "<button name='button-fetch' class='upvoteIdeaButton btn btn-vote'><img src='/assets/thumb_up.png'></button>"
+                     + "<button name='button-fetch' class='downvoteIdeaButton btn btn-vote'><img src='/assets/thumb_down.png'></button></div>"
                     )
 };

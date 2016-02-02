@@ -1,14 +1,11 @@
 function upvoteIdea() {
-  $('.ideas').delegate('#upvoteIdeaButton', 'click', function() {
+  $('.ideas').delegate('.upvoteIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
-    if ($idea.attr('qual') === "genius") {
-      alert("Can't upvote anymore")
+    if ($idea.data('qual') === "genius") {
+      $($idea).find('p').append("<p class='popup'>Can't upvote anymore</p>")
+      $('.popup').fadeOut(2000)
     } else {
-      var qualities = ['swill', 'plausible', 'genius']
-      var qualId = qualities.findIndex(findQual)
-      function findQual(element, index, array) {
-        return $idea.attr('qual') === element
-      }
+      var qualId = qualities.findIndex(findQual, $idea)
       qualId += 1
       $.ajax({
         type: 'PUT',
