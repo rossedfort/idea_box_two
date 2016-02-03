@@ -4,7 +4,7 @@ function updateIdea() {
     document.getElementById("ideaTitle" + $idea.attr('data-id')).contentEditable = true;
     document.getElementById("ideaBody" + $idea.attr('data-id')).contentEditable = true;
 
-    $($idea).append("<button name='button-fetch' class='saveIdeaButton btn blue btn-save'>Save</button>")
+    $($idea).append("<button class='saveIdeaButton btn blue btn-save'>Save</button>")
 
     $(".saveIdeaButton").click(function(){
       document.getElementById("ideaTitle" + $idea.attr('data-id')).contentEditable = false;
@@ -22,9 +22,7 @@ function updateIdea() {
         type: 'PUT',
         url: '/api/v1/ideas/' + $idea.attr('data-id'),
         data: ideaParams,
-        success: function() {
-          fetchIdeas();
-        },
+        success: function() {},
         error: function(xhr) {
           console.log(xhr.responseText)
         }

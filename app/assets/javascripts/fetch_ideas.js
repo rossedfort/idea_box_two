@@ -1,5 +1,5 @@
 function fetchIdeas(){
-  var newestIdeaID = parseInt($(".idea").first().attr("data-id"))
+  var newestIdeaID = parseInt($(".idea").first().data("id"))
 
   $.get("/api/v1/ideas").then(checkIdeasAndRenderNew).fail(error)
 

@@ -14,8 +14,8 @@ function renderIdea(idea) {
                      + idea.quality
                      + "</p><br>"
                      + "<button name='button-fetch' class='deleteIdeaButton btn red btn-delete'>Delete</button>"
-                     + "<button name='button-fetch' class='updateIdeaButton btn green btn-update'>Edit</button>"
-                     + "<button name='button-fetch' class='upvoteIdeaButton btn btn-vote'><img src='/assets/thumb_up.png'></button>"
-                     + "<button name='button-fetch' class='downvoteIdeaButton btn btn-vote'><img src='/assets/thumb_down.png'></button></div>"
+                     + "<button class='updateIdeaButton btn green btn-update'>Edit</button>"
+                     + "<button class='upvoteIdeaButton btn btn-vote'><img src='/assets/thumb_up.png'></button>"
+                     + "<button class='downvoteIdeaButton btn btn-vote'><img src='/assets/thumb_down.png'></button></div>"
                     )
 };

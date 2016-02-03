@@ -5,20 +5,18 @@ function downvoteIdea() {
       $($idea).find('p').append("<p class='popup'>Can't downvote anymore</p>")
       $('.popup').fadeOut(2000)
     } else {
-      var qualId = qualities.findIndex(findQual, $idea)
-      qualId -= 1
+      var qualInteger = qualities.findIndex(findQual, $idea)
+      qualInteger -= 1
+      renderNewQuality($idea, qualInteger)
       $.ajax({
         type: 'PUT',
-        url: '/api/v1/ideas/' + $idea.attr('data-id'),
+        url: '/api/v1/ideas/' + $idea.data('id'),
         data: {
           idea: {
-            quality: qualId
+            quality: qualInteger
           }
         },
-        success: function() {
-          $(".ideas").children().remove();
-          fetchIdeas();
-        },
+        success: function() {},
         error: function(xhr) {
           console.log(xhr.responseText)
         }
