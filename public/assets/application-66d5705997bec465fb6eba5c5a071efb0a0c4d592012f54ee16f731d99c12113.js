@@ -19202,22 +19202,16 @@ function createIdea() {
         body:  $("#ideaBody").val()
       }
     }
+    $.post("/api/v1/ideas", ideaParams).then(newIdea).fail(error);
 
-    $.ajax({
-      type:    "POST",
-      url:     "/api/v1/ideas",
-      data:    ideaParams,
-      success: function(newIdea) {
-        renderIdea(newIdea)
-        $("#ideaTitle").val("")
-        $("#ideaBody").val("")
-      },
-      error: function(xhr) {
-        console.log(xhr.responseText)
-      }
-    })
+    function newIdea(idea) {
+      renderIdea(idea)
+      $("#ideaTitle").val("")
+      $("#ideaBody").val("")
+    }
   });
-};
+}
+;
 function deleteIdea() {
   $('.ideas').delegate('.deleteIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea")
@@ -19241,20 +19235,18 @@ function downvoteIdea() {
       $($idea).find('p').append("<p class='popup'>Can't downvote anymore</p>")
       $('.popup').fadeOut(2000)
     } else {
-      var qualId = qualities.findIndex(findQual, $idea)
-      qualId -= 1
+      var qualInteger = qualities.findIndex(findQual, $idea)
+      qualInteger -= 1
+      renderNewQuality($idea, qualInteger)
       $.ajax({
         type: 'PUT',
-        url: '/api/v1/ideas/' + $idea.attr('data-id'),
+        url: '/api/v1/ideas/' + $idea.data('id'),
         data: {
           idea: {
-            quality: qualId
+            quality: qualInteger
           }
         },
-        success: function() {
-          $(".ideas").children().remove();
-          fetchIdeas();
-        },
+        success: function() {},
         error: function(xhr) {
           console.log(xhr.responseText)
         }
@@ -19262,23 +19254,22 @@ function downvoteIdea() {
     }
   });
 };
+function error(xhr) {
+  console.log(xhr.responseText)
+}
+;
 function fetchIdeas(){
-  var newestIdeaID = parseInt($(".idea").first().attr("data-id"))
+  var newestIdeaID = parseInt($(".idea").first().data("id"))
 
-  $.ajax({
-    type:    "GET",
-    url:     "/api/v1/ideas",
-    success: function(ideas) {
-      $.each(ideas, function(index, idea) {
-        if (isNaN(newestIdeaID) || idea.id > newestIdeaID) {
-          renderIdea(idea)
-        }
-      })
-    },
-    error: function(xhr) {
-      console.log(xhr.responseText)
-    }
-  })
+  $.get("/api/v1/ideas").then(checkIdeasAndRenderNew).fail(error)
+
+  function checkIdeasAndRenderNew(ideas) {
+    $.each(ideas, function(index, idea) {
+      if (isNaN(newestIdeaID) || idea.id > newestIdeaID) {
+        renderIdea(idea)
+      }
+    })
+  }
 };
 
 function fetchIdeasButton(){
@@ -19288,7 +19279,7 @@ function fetchIdeasButton(){
 };
 function filter() {
   $("#filter").keyup(function(){
-    $(".title").filter(function(int, element){
+    $(".idea-title").filter(function(int, element){
       var title = $(element).text()
       var search = $('#filter').val()
       if (title.includes(search)) {
@@ -19301,8 +19292,8 @@ function filter() {
 };
 var qualities = ['swill', 'plausible', 'genius']
 
-function findQual(element, index, array) {
-  return this.data('qual') === element
+function findQual(quality) {
+  return this.data('qual') === quality
 }
 ;
 function renderIdea(idea) {
@@ -19314,16 +19305,16 @@ function renderIdea(idea) {
                      + idea.quality
                      + " >"
                      + "<h5>Title: </h5>"
-                     + "<h5 class='title' id='ideaTitle" + idea.id + "' >" + idea.title + "</h5><br>"
+                     + "<h5 class='idea-title' id='ideaTitle" + idea.id + "' >" + idea.title + "</h5><br>"
                      + "<h5>Body: </h5>"
-                     + "<h5 id='ideaBody" + idea.id + "' >" + idea.body + "</h5><br>"
+                     + "<h5 class='idea-body' id='ideaBody" + idea.id + "' >" + idea.body + "</h5><br>"
                      + "<p class='quality'>Quality: "
                      + idea.quality
                      + "</p><br>"
                      + "<button name='button-fetch' class='deleteIdeaButton btn red btn-delete'>Delete</button>"
-                     + "<button name='button-fetch' class='updateIdeaButton btn green btn-update'>Edit</button>"
-                     + "<button name='button-fetch' class='upvoteIdeaButton btn btn-vote'><img src='/assets/thumb_up.png'></button>"
-                     + "<button name='button-fetch' class='downvoteIdeaButton btn btn-vote'><img src='/assets/thumb_down.png'></button></div>"
+                     + "<button class='updateIdeaButton btn green btn-update'>Edit</button>"
+                     + "<button class='upvoteIdeaButton btn btn-vote'><img src='/assets/thumb_up.png'></button>"
+                     + "<button class='downvoteIdeaButton btn btn-vote'><img src='/assets/thumb_down.png'></button></div>"
                     )
 };
 function updateIdea() {
@@ -19332,7 +19323,7 @@ function updateIdea() {
     document.getElementById("ideaTitle" + $idea.attr('data-id')).contentEditable = true;
     document.getElementById("ideaBody" + $idea.attr('data-id')).contentEditable = true;
 
-    $($idea).append("<button name='button-fetch' class='saveIdeaButton btn blue btn-save'>Save</button>")
+    $($idea).append("<button class='saveIdeaButton btn blue btn-save'>Save</button>")
 
     $(".saveIdeaButton").click(function(){
       document.getElementById("ideaTitle" + $idea.attr('data-id')).contentEditable = false;
@@ -19350,9 +19341,7 @@ function updateIdea() {
         type: 'PUT',
         url: '/api/v1/ideas/' + $idea.attr('data-id'),
         data: ideaParams,
-        success: function() {
-          fetchIdeas();
-        },
+        success: function() {},
         error: function(xhr) {
           console.log(xhr.responseText)
         }
@@ -19360,6 +19349,55 @@ function updateIdea() {
     });
   });
 };
+function updateTitleInline() {
+  $('.ideas').delegate('.idea-title', 'click', function() {
+    var $idea = $(this).closest(".idea");
+    $('#ideaTitle' + $idea.data('id')).attr('contenteditable', true);
+    $("#ideaTitle" + $idea.data('id')).keyup(function(event){
+      if(event.which === 13){
+        handleEnterKeyPress(event, $idea)
+      }
+    });
+  });
+}
+
+function updateBodyInline() {
+  $('.ideas').delegate('.idea-body', 'click', function() {
+    var $idea = $(this).closest(".idea");
+    $('#ideaBody' + $idea.data('id')).attr('contenteditable', true);
+    $("#ideaBody" + $idea.data('id')).keyup(function(event){
+      if(event.which === 13){
+        handleEnterKeyPress(event, $idea)
+      }
+    });
+  });
+}
+
+function inlineUpdateIdea(idea) {
+  var ideaParams = {
+    idea: {
+      id: idea.data('id'),
+      title: $("#ideaTitle" + idea.data('id')).text(),
+      body: $("#ideaBody" + idea.data('id')).text()
+    }
+  }
+  $.ajax({
+    type: 'PUT',
+    url: '/api/v1/ideas/' + idea.data('id'),
+    data: ideaParams,
+    success: function() {},
+    error: function(xhr) {
+      console.log(xhr.responseText)
+    }
+  });
+}
+
+function handleEnterKeyPress(event, idea){
+  event.preventDefault();
+  $('#ideaTitle' + idea.data('id')).attr('contenteditable', false);
+  inlineUpdateIdea(idea);
+}
+;
 function upvoteIdea() {
   $('.ideas').delegate('.upvoteIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
@@ -19367,20 +19405,18 @@ function upvoteIdea() {
       $($idea).find('p').append("<p class='popup'>Can't upvote anymore</p>")
       $('.popup').fadeOut(2000)
     } else {
-      var qualId = qualities.findIndex(findQual, $idea)
-      qualId += 1
+      var qualInteger = qualities.findIndex(findQual, $idea)
+      qualInteger += 1
+      renderNewQuality($idea, qualInteger)
       $.ajax({
         type: 'PUT',
-        url: '/api/v1/ideas/' + $idea.attr('data-id'),
+        url: '/api/v1/ideas/' + $idea.data('id'),
         data: {
           idea: {
-            quality: qualId
+            quality: qualInteger
           }
         },
-        success: function() {
-          $(".ideas").children().remove();
-          fetchIdeas();
-        },
+        success: function() {},
         error: function(xhr) {
           console.log(xhr.responseText)
         }
@@ -19388,6 +19424,13 @@ function upvoteIdea() {
     }
   });
 };
+
+function renderNewQuality(idea, qualityInteger) {
+  var newQuality = qualities[qualityInteger];
+  $(idea).find('.quality').replaceWith("<p class='quality'>Quality: " + newQuality + "</p>")
+  $(idea).data('qual', newQuality)
+}
+;
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -19415,4 +19458,6 @@ $(document).ready(function(){
   upvoteIdea();
   downvoteIdea();
   filter();
+  updateTitleInline();
+  updateBodyInline();
 });
