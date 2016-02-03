@@ -19219,7 +19219,7 @@ function createIdea() {
   });
 };
 function deleteIdea() {
-  $('.ideas').delegate('#deleteIdeaButton', 'click', function() {
+  $('.ideas').delegate('.deleteIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea")
 
     $.ajax({
@@ -19235,16 +19235,13 @@ function deleteIdea() {
   });
 };
 function downvoteIdea() {
-  $('.ideas').delegate('#downvoteIdeaButton', 'click', function() {
+  $('.ideas').delegate('.downvoteIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
-    if ($idea.attr('qual') === "swill") {
-      alert("Can't downvote anymore")
+    if ($idea.data('qual') === "swill") {
+      $($idea).find('p').append("<p class='popup'>Can't downvote anymore</p>")
+      $('.popup').fadeOut(2000)
     } else {
-      var qualities = ['swill', 'plausible', 'genius']
-      var qualId = qualities.findIndex(findQual)
-      function findQual(element, index, array) {
-        return $idea.attr('qual') === element
-      }
+      var qualId = qualities.findIndex(findQual, $idea)
       qualId -= 1
       $.ajax({
         type: 'PUT',
@@ -19289,39 +19286,58 @@ function fetchIdeasButton(){
     fetchIdeas();
   })
 };
+function filter() {
+  $("#filter").keyup(function(){
+    $(".title").filter(function(int, element){
+      var title = $(element).text()
+      var search = $('#filter').val()
+      if (title.includes(search)) {
+        $(element).parent().removeClass('hidden')
+      } else {
+        $(element).parent().addClass('hidden')
+      }
+    });
+  });
+};
+var qualities = ['swill', 'plausible', 'genius']
+
+function findQual(element, index, array) {
+  return this.data('qual') === element
+}
+;
 function renderIdea(idea) {
   $(".ideas").prepend("<div class='idea' id=idea"
                      + idea.id
                      + " data-id="
                      + idea.id
-                     + " qual="
+                     + " data-qual="
                      + idea.quality
                      + " >"
                      + "<h5>Title: </h5>"
-                     + "<h5 id='ideaTitle" + idea.id + "' >" + idea.title + "</h5><br>"
+                     + "<h5 class='title' id='ideaTitle" + idea.id + "' >" + idea.title + "</h5><br>"
                      + "<h5>Body: </h5>"
                      + "<h5 id='ideaBody" + idea.id + "' >" + idea.body + "</h5><br>"
-                     + "<p>Quality: "
+                     + "<p class='quality'>Quality: "
                      + idea.quality
-                     + "</p>"
-                     + "<button id='deleteIdeaButton' name='button-fetch' class='btn red btn-delete'>Delete</button>"
-                     + "<button id='updateIdeaButton' name='button-fetch' class='btn green btn-update'>Edit</button>"
-                     + "<button id='upvoteIdeaButton' name='button-fetch' class='btn btn-vote'><img src='/assets/thumb_up.png'></button>"
-                     + "<button id='downvoteIdeaButton' name='button-fetch' class='btn btn-vote'><img src='/assets/thumb_down.png'></button></div>"
+                     + "</p><br>"
+                     + "<button name='button-fetch' class='deleteIdeaButton btn red btn-delete'>Delete</button>"
+                     + "<button name='button-fetch' class='updateIdeaButton btn green btn-update'>Edit</button>"
+                     + "<button name='button-fetch' class='upvoteIdeaButton btn btn-vote'><img src='/assets/thumb_up.png'></button>"
+                     + "<button name='button-fetch' class='downvoteIdeaButton btn btn-vote'><img src='/assets/thumb_down.png'></button></div>"
                     )
 };
 function updateIdea() {
-  $('.ideas').delegate('#updateIdeaButton', 'click', function() {
+  $('.ideas').delegate('.updateIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
     document.getElementById("ideaTitle" + $idea.attr('data-id')).contentEditable = true;
     document.getElementById("ideaBody" + $idea.attr('data-id')).contentEditable = true;
 
-    $($idea).append("<button id='saveIdeaButton' name='button-fetch' class='btn blue btn-save'>Save</button>")
+    $($idea).append("<button name='button-fetch' class='saveIdeaButton btn blue btn-save'>Save</button>")
 
-    $("#saveIdeaButton").click(function(){
+    $(".saveIdeaButton").click(function(){
       document.getElementById("ideaTitle" + $idea.attr('data-id')).contentEditable = false;
       document.getElementById("ideaBody" + $idea.attr('data-id')).contentEditable = false;
-      $("#saveIdeaButton").remove();
+      $(".saveIdeaButton").remove();
       var ideaParams = {
         idea: {
           id: $idea.attr('data-id'),
@@ -19345,16 +19361,13 @@ function updateIdea() {
   });
 };
 function upvoteIdea() {
-  $('.ideas').delegate('#upvoteIdeaButton', 'click', function() {
+  $('.ideas').delegate('.upvoteIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
-    if ($idea.attr('qual') === "genius") {
-      alert("Can't upvote anymore")
+    if ($idea.data('qual') === "genius") {
+      $($idea).find('p').append("<p class='popup'>Can't upvote anymore</p>")
+      $('.popup').fadeOut(2000)
     } else {
-      var qualities = ['swill', 'plausible', 'genius']
-      var qualId = qualities.findIndex(findQual)
-      function findQual(element, index, array) {
-        return $idea.attr('qual') === element
-      }
+      var qualId = qualities.findIndex(findQual, $idea)
       qualId += 1
       $.ajax({
         type: 'PUT',
@@ -19401,4 +19414,5 @@ $(document).ready(function(){
   updateIdea();
   upvoteIdea();
   downvoteIdea();
+  filter();
 });

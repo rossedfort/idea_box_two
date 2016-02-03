@@ -15737,22 +15737,27 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 }
 /* line 22, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .createIdeaForm {
-  margin: 10px 0px 100px 0px;
+  background: white;
+  padding: 20px;
+  margin: 10px 0px 75px 0px;
 }
 
-/* line 26, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 28, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .idea {
-  padding: 10px;
+  background: white;
+  padding: 20px;
   border: 2px solid #ccc;
   margin-bottom: 50px;
-}
-
-/* line 32, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
-.idea h5 {
-  display: inline;
+  overflow-y: auto;
 }
 
 /* line 36, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+.idea h5 {
+  margin-top: 25px;
+  display: inline;
+}
+
+/* line 41, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .btn-delete {
   border-width: 2px;
   border-color: white;
@@ -15762,7 +15767,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   padding: 0 1rem;
 }
 
-/* line 45, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 50, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .btn-update {
   border-width: 2px;
   border-color: white;
@@ -15773,7 +15778,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   margin-left: 10px;
 }
 
-/* line 55, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 60, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .btn-save {
   border-width: 2px;
   border-color: white;
@@ -15784,7 +15789,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   margin-left: 10px;
 }
 
-/* line 65, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 70, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .btn-vote {
   border-width: 2px;
   border-color: white;
@@ -15795,25 +15800,42 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   margin-left: 10px;
 }
 
-/* line 75, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 80, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 [contenteditable="true"] {
   background-color: #e1f5fe;
 }
 
-/* line 79, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 84, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 [contenteditable="true"]:active,
 [contenteditable="true"]:focus {
   background-color: #e1f5fe;
 }
 
-/* line 84, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
-#upvoteIdeaButton img {
+/* line 89, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+.upvoteIdeaButton img {
   width: 20px;
   padding: 0px;
 }
 
-/* line 89, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
-#downvoteIdeaButton img {
+/* line 94, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+.downvoteIdeaButton img {
   width: 20px;
   padding: 0px;
+}
+
+/* line 99, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+.popup {
+  color: red;
+  margin-left: 20px;
+}
+
+/* line 104, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+.idea p {
+  display: inline;
+  margin-top: 25px;
+}
+
+/* line 109, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+.hidden {
+  display: none;
 }
