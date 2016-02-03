@@ -6,7 +6,6 @@ function filter() {
       if (title.includes(search)) {
         $(element).parent().removeClass('hidden')
       } else {
-        debugger;
         $(element).parent().addClass('hidden')
       }
     });
