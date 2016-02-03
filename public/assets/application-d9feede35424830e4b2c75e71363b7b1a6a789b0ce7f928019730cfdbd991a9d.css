@@ -15736,13 +15736,18 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   }
 }
 /* line 22, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+body {
+  background-image: url(/assets/pusheen-45a238cda00549502a97308e49a077655b5c1a60bedf44fab67b945571cbd8e7.png);
+}
+
+/* line 26, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .createIdeaForm {
   background: white;
   padding: 20px;
-  margin: 10px 0px 75px 0px;
+  margin: 40px 0px 75px 0px;
 }
 
-/* line 28, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 32, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .idea {
   background: white;
   padding: 20px;
@@ -15751,13 +15756,13 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   overflow-y: auto;
 }
 
-/* line 36, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 40, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .idea h5 {
   margin-top: 25px;
   display: inline;
 }
 
-/* line 41, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 45, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .btn-delete {
   border-width: 2px;
   border-color: white;
@@ -15767,7 +15772,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   padding: 0 1rem;
 }
 
-/* line 50, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 54, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .btn-update {
   border-width: 2px;
   border-color: white;
@@ -15778,7 +15783,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   margin-left: 10px;
 }
 
-/* line 60, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 64, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .btn-save {
   border-width: 2px;
   border-color: white;
@@ -15789,7 +15794,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   margin-left: 10px;
 }
 
-/* line 70, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 74, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .btn-vote {
   border-width: 2px;
   border-color: white;
@@ -15800,42 +15805,42 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   margin-left: 10px;
 }
 
-/* line 80, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 84, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 [contenteditable="true"] {
   background-color: #e1f5fe;
 }
 
-/* line 84, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 88, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 [contenteditable="true"]:active,
 [contenteditable="true"]:focus {
   background-color: #e1f5fe;
 }
 
-/* line 89, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 93, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .upvoteIdeaButton img {
   width: 20px;
   padding: 0px;
 }
 
-/* line 94, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 98, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .downvoteIdeaButton img {
   width: 20px;
   padding: 0px;
 }
 
-/* line 99, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 103, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .popup {
   color: red;
   margin-left: 20px;
 }
 
-/* line 104, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 108, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .idea p {
   display: inline;
   margin-top: 25px;
 }
 
-/* line 109, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
+/* line 113, /Users/rossedfort/code/mod_4/projects/idea_box_two/app/assets/stylesheets/application.scss */
 .hidden {
   display: none;
 }
