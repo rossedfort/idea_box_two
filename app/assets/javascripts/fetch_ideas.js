@@ -1,7 +1,7 @@
 function fetchIdeas(){
   var newestIdeaID = parseInt($(".idea").first().data("id"))
 
-  $.get("/api/v1/ideas").then(checkIdeasAndRenderNew).fail(error)
+  $.get("/api/v1/ideas").then(checkIdeasAndRenderNew).then(truncate).fail(error)
 
   function checkIdeasAndRenderNew(ideas) {
     $.each(ideas, function(index, idea) {
@@ -10,10 +10,4 @@ function fetchIdeas(){
       }
     })
   }
-};
-
-function fetchIdeasButton(){
-  $("[name='button-fetch']").click(function(){
-    fetchIdeas();
-  })
 };
