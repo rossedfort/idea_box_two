@@ -6,19 +6,12 @@ function createIdea() {
         body:  $("#ideaBody").val()
       }
     }
+    $.post("/api/v1/ideas", ideaParams).then(newIdea).fail(error);
 
-    $.ajax({
-      type:    "POST",
-      url:     "/api/v1/ideas",
-      data:    ideaParams,
-      success: function(newIdea) {
-        renderIdea(newIdea)
-        $("#ideaTitle").val("")
-        $("#ideaBody").val("")
-      },
-      error: function(xhr) {
-        console.log(xhr.responseText)
-      }
-    })
+    function newIdea(idea) {
+      renderIdea(idea)
+      $("#ideaTitle").val("")
+      $("#ideaBody").val("")
+    }
   });
-};
+}
