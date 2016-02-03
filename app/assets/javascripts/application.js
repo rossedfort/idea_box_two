@@ -25,4 +25,5 @@ $(document).ready(function(){
   upvoteIdea();
   downvoteIdea();
   filter();
+  updateInline();
 });

@@ -9,7 +9,7 @@ function renderIdea(idea) {
                      + "<h5>Title: </h5>"
                      + "<h5 class='title' id='ideaTitle" + idea.id + "' >" + idea.title + "</h5><br>"
                      + "<h5>Body: </h5>"
-                     + "<h5 id='ideaBody" + idea.id + "' >" + idea.body + "</h5><br>"
+                     + "<h5 class='body' id='ideaBody" + idea.id + "' >" + idea.body + "</h5><br>"
                      + "<p class='quality'>Quality: "
                      + idea.quality
                      + "</p><br>"
