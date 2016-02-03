@@ -1,8 +1,8 @@
 function updateInline() {
-  $('.ideas').delegate('.title', 'click', function() {
+  $('.ideas').delegate('.idea-title', 'click', function() {
     var $idea = $(this).closest(".idea");
-    document.getElementById("ideaTitle" + $idea.attr('data-id')).contentEditable = true;
-    $("#ideaTitle" + $idea.attr('data-id')).keyup(function(event){
+    $('#ideaTitle' + $idea.data('id')).attr('contenteditable', true);
+    $("#ideaTitle" + $idea.data('id')).keyup(function(event){
       if(event.keyCode === 13){
         event.preventDefault();
         inlineUpdateIdea($idea);
@@ -10,10 +10,10 @@ function updateInline() {
     });
   });
 
-  $('.ideas').delegate('.body', 'click', function() {
+  $('.ideas').delegate('.idea-body', 'click', function() {
     var $idea = $(this).closest(".idea");
-    document.getElementById("ideaBody" + $idea.attr('data-id')).contentEditable = true;
-    $("#ideaBody" + $idea.attr('data-id')).keyup(function(event){
+    $('#ideaBody' + $idea.data('id')).attr('contenteditable', true);
+    $("#ideaBody" + $idea.data('id')).keyup(function(event){
       if(event.keyCode === 13){
         event.preventDefault();
         inlineUpdateIdea($idea);
@@ -23,18 +23,19 @@ function updateInline() {
 }
 
 function inlineUpdateIdea(idea) {
-  document.getElementById("ideaTitle" + idea.attr('data-id')).contentEditable = false;
-  document.getElementById("ideaBody" + idea.attr('data-id')).contentEditable = false;
+  debugger;
+  $('#ideaTitle' + idea.data('id')).attr('contenteditable', false);
+  $('#ideaBody' + idea.data('id')).attr('contenteditable', false);
   var ideaParams = {
     idea: {
-      id: idea.attr('data-id'),
-      title: $("#ideaTitle" + idea.attr('data-id')).text(),
-      body: $("#ideaBody" + idea.attr('data-id')).text()
+      id: idea.data('id'),
+      title: $("#ideaTitle" + idea.data('id')).text(),
+      body: $("#ideaBody" + idea.data('id')).text()
     }
   }
   $.ajax({
     type: 'PUT',
-    url: '/api/v1/ideas/' + idea.attr('data-id'),
+    url: '/api/v1/ideas/' + idea.data('id'),
     data: ideaParams,
     success: function() {
       fetchIdeas();
