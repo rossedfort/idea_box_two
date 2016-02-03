@@ -18,10 +18,14 @@
  $primary-color: color("gray", "lighten-1") !default;
  @import 'materialize';
 
+body {
+  background-image: url("pusheen.png")
+}
+
 .createIdeaForm {
   background: white;
   padding: 20px;
-  margin: 10px 0px 75px 0px;
+  margin: 40px 0px 75px 0px;
 }
 
 .idea {
