@@ -5,7 +5,6 @@ function upvoteIdea() {
     if (quality === "genius") {
       buildPopUp($idea, 'upvote');
     } else {
-      debugger;
       var qualInteger = qualities.indexOf(quality);
       qualInteger += 1
       renderNewQuality.apply(this, [$idea, qualInteger])

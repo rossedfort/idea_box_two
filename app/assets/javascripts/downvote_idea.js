@@ -5,7 +5,6 @@ function downvoteIdea() {
     if (quality === "swill") {
       buildPopUp($idea, 'downvote');
     } else {
-      debugger;
       var qualInteger = qualities.indexOf(quality);
       qualInteger -= 1
       renderNewQuality.apply(this, [$idea, qualInteger])

@@ -19240,7 +19240,6 @@ function downvoteIdea() {
     if (quality === "swill") {
       buildPopUp($idea, 'downvote');
     } else {
-      debugger;
       var qualInteger = qualities.indexOf(quality);
       qualInteger -= 1
       renderNewQuality.apply(this, [$idea, qualInteger])
@@ -19313,7 +19312,6 @@ function renderIdea(idea) {
                     )
 };
 function renderNewQuality(idea, qualityInteger) {
-  debugger;
   var newQuality = qualities[qualityInteger];
   $(idea).find('.quality').replaceWith("<p class='quality'>Quality: " + newQuality + "</p>")
   var div = $(this).parent()[0]
@@ -19462,7 +19460,6 @@ function upvoteIdea() {
     if (quality === "genius") {
       buildPopUp($idea, 'upvote');
     } else {
-      debugger;
       var qualInteger = qualities.indexOf(quality);
       qualInteger += 1
       renderNewQuality.apply(this, [$idea, qualInteger])
