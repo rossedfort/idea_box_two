@@ -19194,6 +19194,11 @@ Picker.extend( 'pickadate', DatePicker )
   };
 
 }).call(this);
+function buildPopUp(idea, voteType) {
+  $(idea).find('p').append("<p class='popup'>Can't " + voteType + " anymore</p>")
+  $('.popup').fadeOut(2000)
+}
+;
 function createIdea() {
   $("#createIdeaButton").click(function(){
     var ideaParams = {
@@ -19232,8 +19237,7 @@ function downvoteIdea() {
   $('.ideas').delegate('.downvoteIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
     if ($idea.data('qual') === "swill") {
-      $($idea).find('p').append("<p class='popup'>Can't downvote anymore</p>")
-      $('.popup').fadeOut(2000)
+      buildPopUp($idea, 'downvote');
     } else {
       var qualInteger = qualities.findIndex(findQual, $idea)
       qualInteger -= 1
@@ -19256,6 +19260,7 @@ function downvoteIdea() {
 };
 function error(xhr) {
   console.log(xhr.responseText)
+  alert('Please fill in body and title')
 }
 ;
 function fetchIdeas(){
@@ -19311,6 +19316,12 @@ function renderIdea(idea) {
                      + "<button class='downvoteIdeaButton btn btn-vote'><img src='/assets/thumb_down.png'></button></div>"
                     )
 };
+function renderNewQuality(idea, qualityInteger) {
+  var newQuality = qualities[qualityInteger];
+  $(idea).find('.quality').replaceWith("<p class='quality'>Quality: " + newQuality + "</p>")
+  $(idea).data('qual', newQuality)
+}
+;
 function truncate(){
   $('.idea-body').each(function(){
     var text = $(this).text()
@@ -19323,14 +19334,13 @@ function truncate(){
 function updateIdea() {
   $('.ideas').delegate('.updateIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
-    document.getElementById("ideaTitle" + $idea.attr('data-id')).contentEditable = true;
-    document.getElementById("ideaBody" + $idea.attr('data-id')).contentEditable = true;
-
+    $('#ideaTitle' + $idea.data('id')).attr('contenteditable', true);
+    $('#ideaBody' + $idea.data('id')).attr('contenteditable', true);
     $($idea).append("<button class='saveIdeaButton btn blue btn-save'>Save</button>")
 
     $(".saveIdeaButton").click(function(){
-      document.getElementById("ideaTitle" + $idea.attr('data-id')).contentEditable = false;
-      document.getElementById("ideaBody" + $idea.attr('data-id')).contentEditable = false;
+      $('#ideaTitle' + $idea.data('id')).attr('contenteditable', false);
+      $('#ideaBody' + $idea.data('id')).attr('contenteditable', false);
       $(".saveIdeaButton").remove();
       var ideaParams = {
         idea: {
@@ -19344,7 +19354,9 @@ function updateIdea() {
         type: 'PUT',
         url: '/api/v1/ideas/' + $idea.attr('data-id'),
         data: ideaParams,
-        success: function() {},
+        success: function() {
+          truncate();
+        },
         error: function(xhr) {
           console.log(xhr.responseText)
         }
@@ -19356,8 +19368,9 @@ function updateTitleInline() {
   $('.ideas').delegate('.idea-title', 'click', function() {
     var $idea = $(this).closest(".idea");
     $('#ideaTitle' + $idea.data('id')).attr('contenteditable', true);
-    $("#ideaTitle" + $idea.data('id')).keyup(function(event){
+    $("#ideaTitle" + $idea.data('id')).keypress(function(event){
       if(event.which === 13){
+        event.preventDefault();
         handleEnterKeyPress(event, $idea)
       }
     });
@@ -19368,8 +19381,9 @@ function updateBodyInline() {
   $('.ideas').delegate('.idea-body', 'click', function() {
     var $idea = $(this).closest(".idea");
     $('#ideaBody' + $idea.data('id')).attr('contenteditable', true);
-    $("#ideaBody" + $idea.data('id')).keyup(function(event){
+    $("#ideaBody" + $idea.data('id')).keypress(function(event){
       if(event.which === 13){
+        event.preventDefault();
         handleEnterKeyPress(event, $idea)
       }
     });
@@ -19388,7 +19402,9 @@ function inlineUpdateIdea(idea) {
     type: 'PUT',
     url: '/api/v1/ideas/' + idea.data('id'),
     data: ideaParams,
-    success: function() {},
+    success: function() {
+      truncate();
+    },
     error: function(xhr) {
       console.log(xhr.responseText)
     }
@@ -19396,8 +19412,8 @@ function inlineUpdateIdea(idea) {
 }
 
 function handleEnterKeyPress(event, idea){
-  event.preventDefault();
   $('#ideaTitle' + idea.data('id')).attr('contenteditable', false);
+  $('#ideaBody' + idea.data('id')).attr('contenteditable', false);
   inlineUpdateIdea(idea);
 }
 ;
@@ -19405,8 +19421,7 @@ function upvoteIdea() {
   $('.ideas').delegate('.upvoteIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
     if ($idea.data('qual') === "genius") {
-      $($idea).find('p').append("<p class='popup'>Can't upvote anymore</p>")
-      $('.popup').fadeOut(2000)
+      buildPopUp($idea, 'upvote');
     } else {
       var qualInteger = qualities.findIndex(findQual, $idea)
       qualInteger += 1
@@ -19427,13 +19442,6 @@ function upvoteIdea() {
     }
   });
 };
-
-function renderNewQuality(idea, qualityInteger) {
-  var newQuality = qualities[qualityInteger];
-  $(idea).find('.quality').replaceWith("<p class='quality'>Quality: " + newQuality + "</p>")
-  $(idea).data('qual', newQuality)
-}
-;
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
