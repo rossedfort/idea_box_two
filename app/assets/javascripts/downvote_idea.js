@@ -2,8 +2,7 @@ function downvoteIdea() {
   $('.ideas').delegate('.downvoteIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
     if ($idea.data('qual') === "swill") {
-      $($idea).find('p').append("<p class='popup'>Can't downvote anymore</p>")
-      $('.popup').fadeOut(2000)
+      buildPopUp($idea, 'downvote');
     } else {
       var qualInteger = qualities.findIndex(findQual, $idea)
       qualInteger -= 1

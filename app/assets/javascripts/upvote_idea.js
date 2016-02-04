@@ -2,8 +2,7 @@ function upvoteIdea() {
   $('.ideas').delegate('.upvoteIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
     if ($idea.data('qual') === "genius") {
-      $($idea).find('p').append("<p class='popup'>Can't upvote anymore</p>")
-      $('.popup').fadeOut(2000)
+      buildPopUp($idea, 'upvote');
     } else {
       var qualInteger = qualities.findIndex(findQual, $idea)
       qualInteger += 1
