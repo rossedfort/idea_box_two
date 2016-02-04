@@ -19364,6 +19364,12 @@ function updateTitleInline() {
   $('.ideas').delegate('.idea-title', 'click', function() {
     var $idea = $(this).closest(".idea");
     $('#ideaTitle' + $idea.data('id')).attr('contenteditable', true);
+    $('body').bind('click', function(e) {
+      if($(e.target).closest('.idea').length == 0) {
+        event.preventDefault();
+        handleEnterKeyPress(event, $idea)
+      }
+    });
     $("#ideaTitle" + $idea.data('id')).keypress(function(event){
       if(event.which === 13){
         event.preventDefault();
@@ -19377,6 +19383,12 @@ function updateBodyInline() {
   $('.ideas').delegate('.idea-body', 'click', function() {
     var $idea = $(this).closest(".idea");
     $('#ideaBody' + $idea.data('id')).attr('contenteditable', true);
+    $('body').bind('click', function(e) {
+      if($(e.target).closest('.idea').length == 0) {
+        event.preventDefault();
+        handleEnterKeyPress(event, $idea)
+      }
+    });
     $("#ideaBody" + $idea.data('id')).keypress(function(event){
       if(event.which === 13){
         event.preventDefault();
