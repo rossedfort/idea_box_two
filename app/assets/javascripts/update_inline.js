@@ -2,8 +2,9 @@ function updateTitleInline() {
   $('.ideas').delegate('.idea-title', 'click', function() {
     var $idea = $(this).closest(".idea");
     $('#ideaTitle' + $idea.data('id')).attr('contenteditable', true);
-    $("#ideaTitle" + $idea.data('id')).keyup(function(event){
+    $("#ideaTitle" + $idea.data('id')).keypress(function(event){
       if(event.which === 13){
+        event.preventDefault();
         handleEnterKeyPress(event, $idea)
       }
     });
@@ -14,8 +15,9 @@ function updateBodyInline() {
   $('.ideas').delegate('.idea-body', 'click', function() {
     var $idea = $(this).closest(".idea");
     $('#ideaBody' + $idea.data('id')).attr('contenteditable', true);
-    $("#ideaBody" + $idea.data('id')).keyup(function(event){
+    $("#ideaBody" + $idea.data('id')).keypress(function(event){
       if(event.which === 13){
+        event.preventDefault();
         handleEnterKeyPress(event, $idea)
       }
     });
@@ -44,7 +46,6 @@ function inlineUpdateIdea(idea) {
 }
 
 function handleEnterKeyPress(event, idea){
-  event.preventDefault();
   $('#ideaTitle' + idea.data('id')).attr('contenteditable', false);
   $('#ideaBody' + idea.data('id')).attr('contenteditable', false);
   inlineUpdateIdea(idea);
