@@ -19202,7 +19202,7 @@ function createIdea() {
         body:  $("#ideaBody").val()
       }
     }
-    $.post("/api/v1/ideas", ideaParams).then(newIdea).fail(error);
+    $.post("/api/v1/ideas", ideaParams).then(newIdea).then(truncate).fail(error);
 
     function newIdea(idea) {
       renderIdea(idea)
@@ -19261,7 +19261,7 @@ function error(xhr) {
 function fetchIdeas(){
   var newestIdeaID = parseInt($(".idea").first().data("id"))
 
-  $.get("/api/v1/ideas").then(checkIdeasAndRenderNew).fail(error)
+  $.get("/api/v1/ideas").then(checkIdeasAndRenderNew).then(truncate).fail(error)
 
   function checkIdeasAndRenderNew(ideas) {
     $.each(ideas, function(index, idea) {
@@ -19270,12 +19270,6 @@ function fetchIdeas(){
       }
     })
   }
-};
-
-function fetchIdeasButton(){
-  $("[name='button-fetch']").click(function(){
-    fetchIdeas();
-  })
 };
 function filter() {
   $("#filter").keyup(function(){
@@ -19311,12 +19305,21 @@ function renderIdea(idea) {
                      + "<p class='quality'>Quality: "
                      + idea.quality
                      + "</p><br>"
-                     + "<button name='button-fetch' class='deleteIdeaButton btn red btn-delete'>Delete</button>"
+                     + "<button class='deleteIdeaButton btn red btn-delete'>Delete</button>"
                      + "<button class='updateIdeaButton btn green btn-update'>Edit</button>"
                      + "<button class='upvoteIdeaButton btn btn-vote'><img src='/assets/thumb_up.png'></button>"
                      + "<button class='downvoteIdeaButton btn btn-vote'><img src='/assets/thumb_down.png'></button></div>"
                     )
 };
+function truncate(){
+  $('.idea-body').each(function(){
+    var text = $(this).text()
+    if (text.length > 100) {
+      $(this).text(text.replace(text, $.trim($(this).text()).substring(0, 100).split(" ").slice(0, -1).join(" ") + "..." ));
+    }
+  });
+}
+;
 function updateIdea() {
   $('.ideas').delegate('.updateIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
@@ -19451,7 +19454,6 @@ function renderNewQuality(idea, qualityInteger) {
 
 $(document).ready(function(){
   fetchIdeas();
-  fetchIdeasButton();
   createIdea();
   deleteIdea();
   updateIdea();
