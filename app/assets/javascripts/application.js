@@ -26,6 +26,7 @@ $(document).ready(function(){
   filter();
   updateTitleInline();
   updateBodyInline();
+  sortIdeas();
 });
 
 var qualities = ['swill', 'plausible', 'genius']
