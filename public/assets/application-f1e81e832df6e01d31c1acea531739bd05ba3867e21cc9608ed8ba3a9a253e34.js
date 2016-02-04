@@ -19280,8 +19280,8 @@ function fetchIdeas(){
 function filter() {
   $("#filter").keyup(function(){
     $(".idea-title").filter(function(int, element){
-      var title = $(element).text()
-      var search = $('#filter').val()
+      var title = $(element).text().toLowerCase();
+      var search = $('#filter').val().toLowerCase();
       if (title.includes(search)) {
         $(element).parent().removeClass('hidden')
       } else {
