@@ -55,7 +55,7 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
+test: &test
   <<: *default
   database: idea_box_two_test
 
@@ -83,3 +83,6 @@ production:
   database: idea_box_two_production
   username: idea_box_two
   password: <%= ENV['IDEA_BOX_TWO_DATABASE_PASSWORD'] %>
+
+cucumber:
+  <<: *test
