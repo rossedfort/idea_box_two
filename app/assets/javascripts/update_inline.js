@@ -34,7 +34,9 @@ function inlineUpdateIdea(idea) {
     type: 'PUT',
     url: '/api/v1/ideas/' + idea.data('id'),
     data: ideaParams,
-    success: function() {},
+    success: function() {
+      truncate();
+    },
     error: function(xhr) {
       console.log(xhr.responseText)
     }
@@ -44,5 +46,6 @@ function inlineUpdateIdea(idea) {
 function handleEnterKeyPress(event, idea){
   event.preventDefault();
   $('#ideaTitle' + idea.data('id')).attr('contenteditable', false);
+  $('#ideaBody' + idea.data('id')).attr('contenteditable', false);
   inlineUpdateIdea(idea);
 }
