@@ -1,10 +1,11 @@
 function upvoteIdea() {
   $('.ideas').delegate('.upvoteIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
-    if ($idea.data('qual') === "genius") {
+    var quality = $idea.data('qual');
+    if (quality === "genius") {
       buildPopUp($idea, 'upvote');
     } else {
-      var qualInteger = qualities.findIndex(findQual, $idea)
+      var qualInteger = qualities.indexOf(quality);
       qualInteger += 1
       renderNewQuality($idea, qualInteger)
       $.ajax({

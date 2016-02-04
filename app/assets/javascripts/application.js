@@ -27,3 +27,5 @@ $(document).ready(function(){
   updateTitleInline();
   updateBodyInline();
 });
+
+var qualities = ['swill', 'plausible', 'genius']
