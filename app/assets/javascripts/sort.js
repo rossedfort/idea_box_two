@@ -5,7 +5,6 @@ function sortIdeas() {
     event.preventDefault();
     var ideas = $('.idea')
     var sortedIdeas = sortByRating(ideas);
-    console.log(sortedIdeas);
     $('.ideas').children().remove();
     if (clickCounter % 2) {
       $('.ideas').prepend(ideas.reverse())
