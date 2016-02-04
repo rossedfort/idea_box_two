@@ -1,14 +1,13 @@
 function updateIdea() {
   $('.ideas').delegate('.updateIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
-    document.getElementById("ideaTitle" + $idea.attr('data-id')).contentEditable = true;
-    document.getElementById("ideaBody" + $idea.attr('data-id')).contentEditable = true;
-
+    $('#ideaTitle' + $idea.data('id')).attr('contenteditable', true);
+    $('#ideaBody' + $idea.data('id')).attr('contenteditable', true);
     $($idea).append("<button class='saveIdeaButton btn blue btn-save'>Save</button>")
 
     $(".saveIdeaButton").click(function(){
-      document.getElementById("ideaTitle" + $idea.attr('data-id')).contentEditable = false;
-      document.getElementById("ideaBody" + $idea.attr('data-id')).contentEditable = false;
+      $('#ideaTitle' + $idea.data('id')).attr('contenteditable', false);
+      $('#ideaBody' + $idea.data('id')).attr('contenteditable', false);
       $(".saveIdeaButton").remove();
       var ideaParams = {
         idea: {
