@@ -1,13 +1,14 @@
 function upvoteIdea() {
   $('.ideas').delegate('.upvoteIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
-    var quality = $idea.data('qual');
+    var quality = $idea.attr('data-qual');
     if (quality === "genius") {
       buildPopUp($idea, 'upvote');
     } else {
+      debugger;
       var qualInteger = qualities.indexOf(quality);
       qualInteger += 1
-      renderNewQuality($idea, qualInteger)
+      renderNewQuality.apply(this, [$idea, qualInteger])
       $.ajax({
         type: 'PUT',
         url: '/api/v1/ideas/' + $idea.data('id'),

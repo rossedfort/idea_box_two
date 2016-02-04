@@ -23,5 +23,5 @@ function sortByRating(ideas){
 }
 
 function getQuality(idea){
-  return qualities.indexOf($(idea).data('qual'))
+  return qualities.indexOf($(idea).attr('data-qual'))
 }

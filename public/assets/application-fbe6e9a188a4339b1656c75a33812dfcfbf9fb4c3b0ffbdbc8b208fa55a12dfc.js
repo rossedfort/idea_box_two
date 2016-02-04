@@ -19236,13 +19236,14 @@ function deleteIdea() {
 function downvoteIdea() {
   $('.ideas').delegate('.downvoteIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
-    var quality = $idea.data('qual');
+    var quality = $idea.attr('data-qual');
     if (quality === "swill") {
       buildPopUp($idea, 'downvote');
     } else {
+      debugger;
       var qualInteger = qualities.indexOf(quality);
       qualInteger -= 1
-      renderNewQuality($idea, qualInteger)
+      renderNewQuality.apply(this, [$idea, qualInteger])
       $.ajax({
         type: 'PUT',
         url: '/api/v1/ideas/' + $idea.data('id'),
@@ -19312,9 +19313,11 @@ function renderIdea(idea) {
                     )
 };
 function renderNewQuality(idea, qualityInteger) {
+  debugger;
   var newQuality = qualities[qualityInteger];
   $(idea).find('.quality').replaceWith("<p class='quality'>Quality: " + newQuality + "</p>")
-  $(idea).data('qual', newQuality)
+  var div = $(this).parent()[0]
+  $(div).attr('data-qual' , newQuality);
 }
 ;
 var clickCounter = 1;
@@ -19342,7 +19345,7 @@ function sortByRating(ideas){
 }
 
 function getQuality(idea){
-  return qualities.indexOf($(idea).data('qual'))
+  return qualities.indexOf($(idea).attr('data-qual'))
 }
 ;
 function truncate(){
@@ -19455,13 +19458,14 @@ function handleEnterKeyPress(event, idea){
 function upvoteIdea() {
   $('.ideas').delegate('.upvoteIdeaButton', 'click', function() {
     var $idea = $(this).closest(".idea");
-    var quality = $idea.data('qual');
+    var quality = $idea.attr('data-qual');
     if (quality === "genius") {
       buildPopUp($idea, 'upvote');
     } else {
+      debugger;
       var qualInteger = qualities.indexOf(quality);
       qualInteger += 1
-      renderNewQuality($idea, qualInteger)
+      renderNewQuality.apply(this, [$idea, qualInteger])
       $.ajax({
         type: 'PUT',
         url: '/api/v1/ideas/' + $idea.data('id'),
