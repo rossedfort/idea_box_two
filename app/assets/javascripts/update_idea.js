@@ -21,9 +21,7 @@ function updateIdea() {
         type: 'PUT',
         url: '/api/v1/ideas/' + $idea.attr('data-id'),
         data: ideaParams,
-        success: function() {
-          truncate();
-        },
+        success: function() {},
         error: function(xhr) {
           console.log(xhr.responseText)
         }

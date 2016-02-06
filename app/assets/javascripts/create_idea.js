@@ -6,7 +6,7 @@ function createIdea() {
         body:  $("#ideaBody").val()
       }
     }
-    $.post("/api/v1/ideas", ideaParams).then(newIdea).then(truncate).fail(error);
+    $.post("/api/v1/ideas", ideaParams).then(newIdea).fail(error);
 
     function newIdea(idea) {
       renderIdea(idea)
